@@ -53,12 +53,12 @@ package body One_Attribute_Rule is
       Min_Error   : Natural := Natural'Last;
       Best_Rules  : Rule_Vectors.Vector;
    begin
-      if Data.Num_Instances = 0 or Data.Num_Attributes = 0 then
+      if Data.Num_Instances = 0 then
          raise Invalid_Dataset_Error with "Empty dataset provided to Train_Basic";
       end if;
       
       -- Evaluate each attribute independently
-      for A in 1 .. Attribute_Index (Data.Num_Attributes) loop
+      for A in 1 .. Data.Num_Attributes loop
          declare
             use Value_Class_Counts;
             Value_Stats   : Map;
