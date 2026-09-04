@@ -12,8 +12,8 @@ package One_Attribute_Rule is
    type Dataset_Grid is array (Positive range <>, Attribute_Index range <>) of Attribute_Value;
 
    -- Represents a set of instances and their corresponding target classes
-   type Dataset (Num_Instances : Natural; Num_Attributes : Natural) is record
-      Grid    : Dataset_Grid (1 .. Num_Instances, 1 .. Attribute_Index (Num_Attributes));
+   type Dataset (Num_Instances : Natural; Num_Attributes : Attribute_Index) is record
+      Grid    : Dataset_Grid (1 .. Num_Instances, 1 .. Num_Attributes);
       Classes : Class_Array (1 .. Num_Instances);
    end record;
 
@@ -48,7 +48,7 @@ package One_Attribute_Rule is
 
    -- Trains a strict One-Attribute Rule model
    function Train_Basic (Data : Dataset) return Basic_Model
-     with Pre => Data.Num_Instances > 0 and Data.Num_Attributes > 0;
+     with Pre => Data.Num_Instances > 0;
 
    -- Predicts a class for a new instance using the strict model
    function Predict_Basic (Model : Basic_Model; Attrs : Attribute_Array) return Class_Label
@@ -58,7 +58,7 @@ package One_Attribute_Rule is
 
    -- Trains a robust model that dynamically resolves unknown values to the global majority class
    function Train_Robust (Data : Dataset) return Robust_Model
-     with Pre => Data.Num_Instances > 0 and Data.Num_Attributes > 0;
+     with Pre => Data.Num_Instances > 0;
 
    -- Predicts a class for a new instance using the robust fallback rules
    function Predict_Robust (Model : Robust_Model; Attrs : Attribute_Array) return Class_Label
