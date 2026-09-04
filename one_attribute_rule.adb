@@ -115,7 +115,7 @@ package body One_Attribute_Rule is
                   
                   -- The error contributed by this value is the frequency of all non-majority classes
                   Attr_Error := Attr_Error + (Total_Occurrences - Max_Class_Count);
-                  Current_Rules.Append ((Value => Val, Class => Best_Class));
+                  Current_Rules.Append (Value_Rule'(Value => Val, Class => Best_Class));
                end;
             end loop;
             
